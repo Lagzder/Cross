@@ -13,6 +13,9 @@ namespace Cross
         {
             Vector test = new Vector();
             test.test();
+            
+            Vector intersection = new Vector();
+            intersection.test2();  
            
             Console.ReadLine();
 
