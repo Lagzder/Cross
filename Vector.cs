@@ -21,6 +21,8 @@ namespace Cross
 
         public double r { get; set; }
 
+        List<Vector> intersections = new List<Vector>();
+
         public double size => Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2) + Math.Pow(z, 2));
 
         public Vector(double x, double y, double z) // konstruktor
@@ -30,7 +32,7 @@ namespace Cross
             this.z = z;
         }
 
-        public Vector(double x, double y, double z, double xt, double yt, double zt)
+        public Vector(double x, double y, double z, double xt, double yt, double zt) // line
         {
             this.x = x;
             this.y = y;
@@ -41,7 +43,7 @@ namespace Cross
             this.zt = zt;
         }
 
-        public Vector (double x, double y, double z, double r)
+        public Vector (double x, double y, double z, double r) // sphere
         {
             this.x = x;
             this.y = y;
@@ -140,7 +142,7 @@ namespace Cross
 
         /*******************************************************2. ZADANIE***************************************************************/
 
-        public void line_sphere_intersection(Vector line, Vector sphere)
+        public List<Vector> line_sphere_intersection(Vector line, Vector sphere)
         {
             double a = Math.Pow(line.xt, 2) + Math.Pow(line.yt, 2) + Math.Pow(line.zt, 2);
             double b = 2 * (line.xt * (line.x - sphere.x) + line.yt * (line.y - sphere.y) + line.zt * (line.z - sphere.z));
@@ -150,7 +152,7 @@ namespace Cross
 
             if (D < 0)
             {
-                Console.WriteLine("No intersection");
+                Console.WriteLine("No intersection");          
             }
 
             if (D == 0)
@@ -162,6 +164,9 @@ namespace Cross
                 double z0 = line.z + (d * line.zt);
 
                 Console.WriteLine("Intersection in 1 point x: {0}, y: {1}, z: {2}", x0, y0, z0);
+
+                intersections.Add(new Vector(x0, y0, z0));
+                return intersections;
             }
 
             if (D > 0)
@@ -178,8 +183,15 @@ namespace Cross
                 double z2 = line.z + (d2 * line.zt);
 
                 Console.WriteLine("Intersection in 2 points\nx1: {0}, y1: {1}, z1: {2}\nx2: {3}, y2: {4}, z2: {5}", x1, y1, z1, x2, y2, z2);
+
+                intersections.Add(new Vector(x1, y1, z1));
+                intersections.Add(new Vector(x2, y2, z2));
+
+                return intersections;         
             }
-        }
+
+            return null;
+       }
 
             public void test2()
         {
@@ -205,10 +217,7 @@ namespace Cross
             Vector line = new Vector(Convert.ToDouble(x), Convert.ToDouble(y), Convert.ToDouble(z), Convert.ToDouble(xt), Convert.ToDouble(yt), Convert.ToDouble(zt));
             Vector sphere = new Vector(Convert.ToDouble(x1), Convert.ToDouble(y1), Convert.ToDouble(z1), Convert.ToDouble(r));
 
-            line_sphere_intersection(line, sphere); 
-        }
-
-            
-        
+            line_sphere_intersection(line, sphere);          
+        } 
     }
 }
