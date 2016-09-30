@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,12 +11,16 @@ namespace Cross
     {
         static void Main(string[] args)
         {
-            Vector test = new Vector();
-            test.test();
+            //List<Vector> list = new List<Vector>();
+            //Vector test = new Vector();
+            //test.test();
             
             Vector intersection = new Vector();
-            intersection.test2();  
-           
+            intersection.test2();
+
+            /*Vector line = new Vector(1, 2, 3, 1, 0, -2);
+            Vector sphere = new Vector(1, 4, 0, 4);*/
+     
             Console.ReadLine();
 
         }
