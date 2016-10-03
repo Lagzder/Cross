@@ -43,14 +43,6 @@ namespace Cross
             this.zt = zt;
         }
 
-        public Vector (double x, double y, double z, double r) // sphere
-        {
-            this.x = x;
-            this.y = y;
-            this.z = z;
-            this.r = r;
-        }
-
         public Vector() { }
 
         public Vector u(Vector v) //normalizovany
@@ -92,57 +84,11 @@ namespace Cross
             return a.x * b.x + a.y * b.y + a.z * b.z;
         }
 
-        public void test()
-        {
-            Console.WriteLine("1. vector:");
-            string length1;
-            string width1;
-            string height1;
-
-            length1 = Console.ReadLine();
-            int x1 = Convert.ToInt32(length1);
-
-            width1 = Console.ReadLine();
-            int y1 = Convert.ToInt32(width1);
-
-            height1 = Console.ReadLine();
-            int z1 = Convert.ToInt32(height1);
-
-            Vector vector1 = new Vector(x1, y1, z1);
-
-            Console.WriteLine("2. vector:");
-            string length2;
-            string width2;
-            string height2;
-
-            length2 = Console.ReadLine();
-            int x2 = Convert.ToInt32(length2);
-
-            width2 = Console.ReadLine();
-            int y2 = Convert.ToInt32(width2);
-
-            height2 = Console.ReadLine();
-            int z2 = Convert.ToInt32(height2);
-
-            Vector vector2 = new Vector(x2, y2, z2);
-
-            Vector add = new Vector();
-            Vector sub = new Vector();
-            double dotProduct;
-            add = vector1 + vector2;
-            sub = vector1 - vector2;
-            dotProduct = (vector1 * vector2);
-
-            Console.WriteLine("\n1. vector: \t\tsize = {0}\n\t\t\tUnit vector: x = {1}, y = {2}, z = {3}", vector1.size, u(vector1).x, u(vector1).y, u(vector1).z);
-            Console.WriteLine("\n2. vector: \t\tsize = {0}\n\t\t\tUnit vector: x = {1}, y = {2}, z = {3}", vector2.size, u(vector2).x, u(vector2).y, u(vector2).z);
-            Console.WriteLine("\nAddition:\t\tx = {0}, y = {1}, z = {2}", add.x, add.y, add.z);
-            Console.WriteLine("Subtraction:\t\tx = {0}, y = {1}, z = {2}", sub.x, sub.y, sub.z);
-            Console.WriteLine("Dot product =\t\t{0}", dotProduct);
-        }
+        
 
         /*******************************************************2. ZADANIE***************************************************************/
 
-        public List<Vector> line_sphere_intersection(Vector line, Vector sphere)
+        public List<Vector> line_sphere_intersection(Vector line, Sphere sphere)
         {
             double a = Math.Pow(line.xt, 2) + Math.Pow(line.yt, 2) + Math.Pow(line.zt, 2);
             double b = 2 * (line.xt * (line.x - sphere.x) + line.yt * (line.y - sphere.y) + line.zt * (line.z - sphere.z));
@@ -193,31 +139,6 @@ namespace Cross
             return null;
        }
 
-            public void test2()
-        {
-            string x; string xt;            
-            string y; string yt;
-            string z; string zt;
-
-            string x1;
-            string y1;
-            string z1;
-            string r;
-
-            Console.WriteLine("Enter the line by parametric form : x = x + n*t...");
-            Console.WriteLine("x = {0} + {1}t", x = Console.ReadLine(), xt = Console.ReadLine());
-            Console.WriteLine("y = {0} + {1}t", y = Console.ReadLine(), yt = Console.ReadLine());
-            Console.WriteLine("z = {0} + {1}t", z = Console.ReadLine(), zt = Console.ReadLine());
-
-            Console.WriteLine("Enter the coordinates(x, y, z) of sphere centre:");
-            Console.WriteLine("x = {0}\ny = {1}\nz = {2}", x1 = Console.ReadLine(), y1 = Console.ReadLine(), z1 = Console.ReadLine());
-            Console.WriteLine("Enter sphere radius:");
-            Console.WriteLine("r = {0}", r = Console.ReadLine());
-
-            Vector line = new Vector(Convert.ToDouble(x), Convert.ToDouble(y), Convert.ToDouble(z), Convert.ToDouble(xt), Convert.ToDouble(yt), Convert.ToDouble(zt));
-            Vector sphere = new Vector(Convert.ToDouble(x1), Convert.ToDouble(y1), Convert.ToDouble(z1), Convert.ToDouble(r));
-
-            line_sphere_intersection(line, sphere);          
-        } 
+         
     }
 }
