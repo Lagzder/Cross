@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -80,9 +80,9 @@ namespace Cross
 
             Vector line = new Vector(Convert.ToDouble(x), Convert.ToDouble(y), Convert.ToDouble(z), Convert.ToDouble(xt), Convert.ToDouble(yt), Convert.ToDouble(zt));
             Sphere sphere = new Sphere(Convert.ToDouble(x1), Convert.ToDouble(y1), Convert.ToDouble(z1), Convert.ToDouble(r));
-            Vector t = new Vector(); //pomocny
+            Sphere t = new Sphere(); //pomocny
 
-            t.line_sphere_intersection(line, sphere);
+            t.GetIntersection(line, sphere);
         }
     }
 }
