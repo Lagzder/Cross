@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
+
+
 namespace Cross
 {
     class Vector
@@ -12,14 +15,6 @@ namespace Cross
         public double y { get; set; }
         public double z { get; set; }
 
-        public double xt { get; set; }
-        public double yt { get; set; }
-        public double zt { get; set; }
-
-        public double r { get; set; }
-
-        List<Vector> intersections = new List<Vector>();
-
         public double size => Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2) + Math.Pow(z, 2));
 
         public Vector(double x, double y, double z) // konstruktor
@@ -27,17 +22,6 @@ namespace Cross
             this.x = x;
             this.y = y;
             this.z = z;
-        }
-
-        public Vector(double x, double y, double z, double xt, double yt, double zt) // line
-        {
-            this.x = x;
-            this.y = y;
-            this.z = z;
-
-            this.xt = xt;
-            this.yt = yt;
-            this.zt = zt;
         }
 
         public Vector() { }
