@@ -8,13 +8,16 @@ namespace Cross
 {
     class Ray
     {
-        public double a { get; set; }
-        public double b { get; set; }
 
-        public Ray(double a, double b)
+        public Vector point = new Vector();
+        public Vector vector = new Vector();
+        
+
+        public Ray(double x0, double y0, double z0, double xd, double yd, double zd)
         {
-            this.a = a;
-            this.b = b;
+           point = new Vector(x0, y0, z0);
+           vector = new Vector(xd, yd, zd);
         }
+
     }
 }
