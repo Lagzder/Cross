@@ -8,6 +8,6 @@ namespace Cross
 {
     interface IObject
     {
-        List<Vector> GetIntersection(Vector line, Sphere sphere);
+        Vector GetIntersection(Ray ray);
     }
 }
