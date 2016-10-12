@@ -8,31 +8,30 @@ namespace Cross
 {
     class Sphere : IObject
     {
-        public double x { get; set; }
-        public double y { get; set; }
-        public double z { get; set; }
-        public double r { get; set; }
+        public double xc { get; set; }
+        public double yc { get; set; }
+        public double zc { get; set; }
+        public double r  { get; set; }
 
-        public Sphere(double x, double y, double z, double r) // sphere
+        public Sphere(double xc, double yc, double zc, double r) // sphere
         {
-            this.x = x;
-            this.y = y;
-            this.z = z;
+            this.xc = xc;
+            this.yc = yc;
+            this.zc = zc;
             this.r = r;
         }
 
         public Sphere() { }
 
-        public List<Vector> GetIntersection(Vector line, Sphere sphere)
+        public Vector GetIntersection(Ray ray)
         {
-            List<Vector> intersections = new List<Vector>();
-
-            double a = Math.Pow(line.xt, 2) + Math.Pow(line.yt, 2) + Math.Pow(line.zt, 2);
-            double b = 2 * (line.xt * (line.x - sphere.x) + line.yt * (line.y - sphere.y) + line.zt * (line.z - sphere.z));
-            double c = Math.Pow((line.x - sphere.x), 2) + Math.Pow((line.y - sphere.y), 2) + Math.Pow((line.z - sphere.z), 2) - Math.Pow(sphere.r, 2);
+           
+            double a = Math.Pow(ray.vector.x, 2) + Math.Pow(ray.vector.y, 2) + Math.Pow(ray.vector.z, 2); //xd, yd, zd
+            double b = 2 * (ray.vector.x * (ray.point.x - xc) + ray.vector.y * (ray.point.y - yc) + ray.vector.z * (ray.point.z - zc));
+            double c = Math.Pow((ray.point.x - xc), 2) + Math.Pow((ray.point.y - yc), 2) + Math.Pow((ray.point.z - zc), 2) -Math.Pow(r, 2);
 
             double D = (b * b) - 4 * a * c;
-
+           
             if (D < 0)
             {
                 Console.WriteLine("No intersection");
@@ -40,37 +39,59 @@ namespace Cross
 
             if (D == 0)
             {
-                double d = -b / 2 * a;
+                double t = -b / 2 * a;
 
-                double x0 = line.x + (d * line.xt);
-                double y0 = line.y + (d * line.yt);
-                double z0 = line.z + (d * line.zt);
+                double x0 = ray.point.x + (t * ray.vector.x);
+                double y0 = ray.point.y + (t * ray.vector.y);
+                double z0 = ray.point.z + (t * ray.vector.z);
 
                 Console.WriteLine("Intersection in 1 point x: {0}, y: {1}, z: {2}", x0, y0, z0);
 
-                intersections.Add(new Vector(x0, y0, z0));
-                return intersections;
+                
             }
 
             if (D > 0)
             {
-                double d1 = (-b + Math.Sqrt(D)) / (2 * a);
-                double d2 = (-b - Math.Sqrt(D)) / (2 * a);
+                double t0 = (-b + Math.Sqrt(D)) / (2 * a);
+                double t1 = (-b - Math.Sqrt(D)) / (2 * a);
+                
+                if(t0 > 0 && t1 > 0)
+                {
+                    if (t0 < t1)
+                    {
+                        double x1 = ray.point.x + (t0 * ray.vector.x);
+                        double y1 = ray.point.y + (t0 * ray.vector.y);
+                        double z1 = ray.point.z + (t0 * ray.vector.z);
+                        Console.WriteLine("Intersection\nx: {0}, y: {1}, z: {2}", x1, y1, z1);
+                    }
+                    else
+                    {
+                        double x1 = ray.point.x + (t1 * ray.vector.x);
+                        double y1 = ray.point.x + (t1 * ray.vector.y);
+                        double z1 = ray.point.x + (t1 * ray.vector.z);
+                        Console.WriteLine("Intersection\nx: {0}, y: {1}, z: {2}", x1, y1, z1);
+                    }
+                }
 
-                double x1 = line.x + (d1 * line.xt);
-                double y1 = line.y + (d1 * line.yt);
-                double z1 = line.z + (d1 * line.zt);
+                if(t0 < 0 && t1 > 0)
+                {
+                    double x1 = ray.point.x + (t1 * ray.vector.x);
+                    double y1 = ray.point.x + (t1 * ray.vector.y);
+                    double z1 = ray.point.x + (t1 * ray.vector.z);
+                    Console.WriteLine("Intersection\nx: {0}, y: {1}, z: {2}", x1, y1, z1);
+                }
+                if(t1 < 0 && t0 > 0)
+                {
+                    double x1 = ray.point.x + (t0 * ray.vector.x);
+                    double y1 = ray.point.y + (t0 * ray.vector.y);
+                    double z1 = ray.point.z + (t0 * ray.vector.z);
+                    Console.WriteLine("Intersection\nx: {0}, y: {1}, z: {2}", x1, y1, z1);
+                }
 
-                double x2 = line.x + (d2 * line.xt);
-                double y2 = line.y + (d2 * line.yt);
-                double z2 = line.z + (d2 * line.zt);
-
-                Console.WriteLine("Intersection in 2 points\nx1: {0}, y1: {1}, z1: {2}\nx2: {3}, y2: {4}, z2: {5}", x1, y1, z1, x2, y2, z2);
-
-                intersections.Add(new Vector(x1, y1, z1));
-                intersections.Add(new Vector(x2, y2, z2));
-
-                return intersections;
+                if(t1 < 0 && t0 < 0)
+                {
+                    Console.WriteLine("Intersections lower then position of origin point");
+                }      
             }
 
             return null;
