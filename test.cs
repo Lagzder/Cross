@@ -103,6 +103,7 @@ namespace Cross
             string y = Console.ReadLine();
 
             RayTracer rayTracer = new RayTracer();
-            rayTracer.CreateRay(Convert.ToDouble(x), Convert.ToDouble(y));        }
+            rayTracer.CreateRay(Convert.ToDouble(x), Convert.ToDouble(y));        
+        }
     }
 }
