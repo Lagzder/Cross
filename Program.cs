@@ -15,7 +15,9 @@ namespace Cross
             //test.test();
 
             Test test = new Test();
-            test.test2();
+            //test.test2();
+            
+            test.test3();
 
             Console.ReadLine();
 
