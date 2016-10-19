@@ -25,7 +25,7 @@ namespace Cross
 
         public Vector GetIntersection(Ray ray)
         {
-           
+            Vector intPoint = new Vector();
             double a = Math.Pow(ray.vector.x, 2) + Math.Pow(ray.vector.y, 2) + Math.Pow(ray.vector.z, 2); //xd, yd, zd
             double b = 2 * (ray.vector.x * (ray.point.x - xc) + ray.vector.y * (ray.point.y - yc) + ray.vector.z * (ray.point.z - zc));
             double c = Math.Pow((ray.point.x - xc), 2) + Math.Pow((ray.point.y - yc), 2) + Math.Pow((ray.point.z - zc), 2) -Math.Pow(r, 2);
@@ -34,7 +34,8 @@ namespace Cross
            
             if (D < 0)
             {
-                Console.WriteLine("No intersection");
+                //Console.WriteLine("No intersection");
+                return null;
             }
 
             if (D == 0)
@@ -44,10 +45,10 @@ namespace Cross
                 double x0 = ray.point.x + (t * ray.vector.x);
                 double y0 = ray.point.y + (t * ray.vector.y);
                 double z0 = ray.point.z + (t * ray.vector.z);
+                //Console.WriteLine("Intersection in 1 point x: {0}, y: {1}, z: {2}", x0, y0, z0);
+                return intPoint = new Vector(x0, y0, z0);
 
-                Console.WriteLine("Intersection in 1 point x: {0}, y: {1}, z: {2}", x0, y0, z0);
 
-                
             }
 
             if (D > 0)
@@ -62,14 +63,16 @@ namespace Cross
                         double x1 = ray.point.x + (t0 * ray.vector.x);
                         double y1 = ray.point.y + (t0 * ray.vector.y);
                         double z1 = ray.point.z + (t0 * ray.vector.z);
-                        Console.WriteLine("Intersection\nx: {0}, y: {1}, z: {2}", x1, y1, z1);
+                        //Console.WriteLine("Intersection\nx: {0}, y: {1}, z: {2}", x1, y1, z1);
+                        return intPoint = new Vector(x1, y1, z1);
                     }
                     else
                     {
                         double x1 = ray.point.x + (t1 * ray.vector.x);
                         double y1 = ray.point.x + (t1 * ray.vector.y);
                         double z1 = ray.point.x + (t1 * ray.vector.z);
-                        Console.WriteLine("Intersection\nx: {0}, y: {1}, z: {2}", x1, y1, z1);
+                        //Console.WriteLine("Intersection\nx: {0}, y: {1}, z: {2}", x1, y1, z1);
+                        return intPoint = new Vector(x1, y1, z1);
                     }
                 }
 
@@ -78,19 +81,22 @@ namespace Cross
                     double x1 = ray.point.x + (t1 * ray.vector.x);
                     double y1 = ray.point.x + (t1 * ray.vector.y);
                     double z1 = ray.point.x + (t1 * ray.vector.z);
-                    Console.WriteLine("Intersection\nx: {0}, y: {1}, z: {2}", x1, y1, z1);
+                    //Console.WriteLine("Intersection\nx: {0}, y: {1}, z: {2}", x1, y1, z1);
+                    return intPoint = new Vector(x1, y1, z1);
                 }
                 if(t1 < 0 && t0 > 0)
                 {
                     double x1 = ray.point.x + (t0 * ray.vector.x);
                     double y1 = ray.point.y + (t0 * ray.vector.y);
                     double z1 = ray.point.z + (t0 * ray.vector.z);
-                    Console.WriteLine("Intersection\nx: {0}, y: {1}, z: {2}", x1, y1, z1);
+                    //Console.WriteLine("Intersection\nx: {0}, y: {1}, z: {2}", x1, y1, z1);
+                    return intPoint = new Vector(x1, y1, z1);
                 }
 
                 if(t1 < 0 && t0 < 0)
                 {
-                    Console.WriteLine("Intersections lower then position of origin point");
+                    //Console.WriteLine("Intersections lower then position of origin point");
+                    return null;
                 }      
             }
 
