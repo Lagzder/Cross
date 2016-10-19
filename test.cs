@@ -8,7 +8,7 @@ namespace Cross
 {
     class Test
     {
-        public void test1() //vectors
+        public void test1() //vektory
         {
             Console.WriteLine("1. vector:");
             string length1;
@@ -96,14 +96,35 @@ namespace Cross
             sphere.GetIntersection(ray);
         }
 
-        public void test3()
+        public void test3() //generovanie ray
         {
             Console.WriteLine("Enter the pixel position on X - axis (0-640) and Y - axis (0-480)");
             string x = Console.ReadLine();
             string y = Console.ReadLine();
 
             RayTracer rayTracer = new RayTracer();
-            rayTracer.CreateRay(Convert.ToDouble(x), Convert.ToDouble(y));        
+            rayTracer.CreateRay(Convert.ToDouble(x), Convert.ToDouble(y));
+        }
+
+        public void test4() //vykreslenie gule
+        {
+            string xc;
+            string yc;
+            string zc;
+            string r;
+            RayTracer ray = new RayTracer();
+
+            Console.WriteLine("Enter the coordinates of sphere centre");
+            xc = Console.ReadLine();
+            yc = Console.ReadLine();
+            zc = Console.ReadLine();
+
+            Console.WriteLine("Enter the size of sphere radius");
+            r = Console.ReadLine();
+
+            Sphere sphere = new Sphere(Convert.ToDouble(xc), Convert.ToDouble(yc), Convert.ToDouble(zc), Convert.ToDouble(r));
+            ray.Render(sphere);
+
         }
     }
 }
