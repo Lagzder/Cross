@@ -10,17 +10,11 @@ namespace Cross
     class Program
     {
         static void Main(string[] args)
-        {           
-            //Vector test = new Vector();
-            //test.test();
-
+        {
             Test test = new Test();
-            //test.test2();
-            
-            test.test3();
+            test.test4();
 
             Console.ReadLine();
-
         }
     }
 }
