@@ -75,7 +75,7 @@ namespace Cross
                                     Vector u = sphere[i].GetIntersection(CreateRay(x * 12.8, y * 9.6));
                                     double size = Math.Sqrt(Math.Pow(u.x, 2) + Math.Pow(u.y, 2) + 1);
 
-                                    if (size < arrayPixel[y * 50 + x].intersectSize) //zistujem ci je novy bod blizsie k pozorovatelovi ako obsaedeny
+                                    if (size < arrayPixel[y * 50 + x].intersectSize) //zistujem ci je novy bod blizsie k pozorovatelovi ako obsadeny
                                     {
                                         arrayPixel[y * 50 + x].intersectSize = size; //priradenie priesecniku gule pixelu
                                         consoleCanvas[y, x] = i + 1; //priradenie priesecniku konzolovemu platnu
