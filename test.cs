@@ -108,23 +108,15 @@ namespace Cross
 
         public void test4() //vykreslenie gule
         {
-            string xc;
-            string yc;
-            string zc;
-            string r;
-            RayTracer ray = new RayTracer();
+            RayTracer raytracer = new RayTracer(1); //zadavanie rozmeru platna
 
-            Console.WriteLine("Enter the coordinates of sphere centre");
-            xc = Console.ReadLine();
-            yc = Console.ReadLine();
-            zc = Console.ReadLine();
-
-            Console.WriteLine("Enter the size of sphere radius");
-            r = Console.ReadLine();
-
-            Sphere sphere = new Sphere(Convert.ToDouble(xc), Convert.ToDouble(yc), Convert.ToDouble(zc), Convert.ToDouble(r));
-            ray.Render(sphere);
-
+            List<Sphere> sphere = new List<Sphere>();
+            sphere.Add(new Sphere(0.1, 0.4, -0.4, 0.1));
+            sphere.Add(new Sphere(0.3, 0.2, -0.59, 0.2));
+            //Tu zadajte dalsie objekty
+            //sphere.Add(new Sphere( , , , ));
+            //sphere.Add(new Sphere( , , , ));
+            raytracer.Render(sphere);
         }
     }
 }
