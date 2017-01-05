@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,27 +8,23 @@ namespace Cross
 {
     class Sphere : IObject
     {
-        public double xc { get; set; }
-        public double yc { get; set; }
-        public double zc { get; set; }
-        public double r  { get; set; }
+        Vector Centre = new Vector();
+        public double R  { get; set; }
 
-        public Sphere(double xc, double yc, double zc, double r) // sphere
+        public Sphere(Vector centre, double r) // sphere
         {
-            this.xc = xc;
-            this.yc = yc;
-            this.zc = zc;
-            this.r = r;
+            this.Centre = centre;
+            this.R = r;
         }
 
         public Sphere() { }
 
         public Vector GetIntersection(Ray ray)
         {
-            Vector intPoint = new Vector();
-            double a = Math.Pow(ray.vector.x, 2) + Math.Pow(ray.vector.y, 2) + Math.Pow(ray.vector.z, 2); //xd, yd, zd
-            double b = 2 * (ray.vector.x * (ray.point.x - xc) + ray.vector.y * (ray.point.y - yc) + ray.vector.z * (ray.point.z - zc));
-            double c = Math.Pow((ray.point.x - xc), 2) + Math.Pow((ray.point.y - yc), 2) + Math.Pow((ray.point.z - zc), 2) -Math.Pow(r, 2);
+            Vector intPixel = new Vector();
+            double a = Math.Pow(ray.vector.X, 2) + Math.Pow(ray.vector.Y, 2) + Math.Pow(ray.vector.Z, 2); //xd, yd, zd
+            double b = 2 * (ray.vector.X * (ray.point.X - Centre.X) + ray.vector.Y * (ray.point.Y - Centre.Y) + ray.vector.Z * (ray.point.Z - Centre.Z));
+            double c = Math.Pow((ray.point.X - Centre.X), 2) + Math.Pow((ray.point.Y - Centre.Y), 2) + Math.Pow((ray.point.Z - Centre.Z), 2) -Math.Pow(R, 2);
 
             double D = (b * b) - 4 * a * c;
            
@@ -42,11 +38,11 @@ namespace Cross
             {
                 double t = -b / 2 * a;
 
-                double x0 = ray.point.x + (t * ray.vector.x);
-                double y0 = ray.point.y + (t * ray.vector.y);
-                double z0 = ray.point.z + (t * ray.vector.z);
+                double x0 = ray.point.X + (t * ray.vector.X);
+                double y0 = ray.point.Y + (t * ray.vector.Y);
+                double z0 = ray.point.Z + (t * ray.vector.Z);
                 //Console.WriteLine("Intersection in 1 point x: {0}, y: {1}, z: {2}", x0, y0, z0);
-                return intPoint = new Vector(x0, y0, z0);
+                return intPixel = new Vector(x0, y0, z0);
 
 
             }
@@ -60,37 +56,37 @@ namespace Cross
                 {
                     if (t0 < t1)
                     {
-                        double x1 = ray.point.x + (t0 * ray.vector.x);
-                        double y1 = ray.point.y + (t0 * ray.vector.y);
-                        double z1 = ray.point.z + (t0 * ray.vector.z);
+                        double x1 = ray.point.X + (t0 * ray.vector.X);
+                        double y1 = ray.point.Y + (t0 * ray.vector.Y);
+                        double z1 = ray.point.Z + (t0 * ray.vector.Z);
                         //Console.WriteLine("Intersection\nx: {0}, y: {1}, z: {2}", x1, y1, z1);
-                        return intPoint = new Vector(x1, y1, z1);
+                        return intPixel = new Vector(x1, y1, z1);
                     }
                     else
                     {
-                        double x1 = ray.point.x + (t1 * ray.vector.x);
-                        double y1 = ray.point.x + (t1 * ray.vector.y);
-                        double z1 = ray.point.x + (t1 * ray.vector.z);
+                        double x1 = ray.point.X + (t1 * ray.vector.X);
+                        double y1 = ray.point.X + (t1 * ray.vector.Y);
+                        double z1 = ray.point.X + (t1 * ray.vector.Z);
                         //Console.WriteLine("Intersection\nx: {0}, y: {1}, z: {2}", x1, y1, z1);
-                        return intPoint = new Vector(x1, y1, z1);
+                        return intPixel = new Vector(x1, y1, z1);
                     }
                 }
 
                 if(t0 < 0 && t1 > 0)
                 {
-                    double x1 = ray.point.x + (t1 * ray.vector.x);
-                    double y1 = ray.point.x + (t1 * ray.vector.y);
-                    double z1 = ray.point.x + (t1 * ray.vector.z);
+                    double x1 = ray.point.X + (t1 * ray.vector.X);
+                    double y1 = ray.point.X + (t1 * ray.vector.Y);
+                    double z1 = ray.point.X + (t1 * ray.vector.Z);
                     //Console.WriteLine("Intersection\nx: {0}, y: {1}, z: {2}", x1, y1, z1);
-                    return intPoint = new Vector(x1, y1, z1);
+                    return intPixel = new Vector(x1, y1, z1);
                 }
                 if(t1 < 0 && t0 > 0)
                 {
-                    double x1 = ray.point.x + (t0 * ray.vector.x);
-                    double y1 = ray.point.y + (t0 * ray.vector.y);
-                    double z1 = ray.point.z + (t0 * ray.vector.z);
+                    double x1 = ray.point.X + (t0 * ray.vector.X);
+                    double y1 = ray.point.Y + (t0 * ray.vector.Y);
+                    double z1 = ray.point.Z + (t0 * ray.vector.Z);
                     //Console.WriteLine("Intersection\nx: {0}, y: {1}, z: {2}", x1, y1, z1);
-                    return intPoint = new Vector(x1, y1, z1);
+                    return intPixel = new Vector(x1, y1, z1);
                 }
 
                 if(t1 < 0 && t0 < 0)
